@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ClientTagService} from "./data/TagViewModel";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+// @ts-ignore
+// @ts-ignore
 root.render(
   <React.StrictMode>
       <App><div className="loader"></div></App>
