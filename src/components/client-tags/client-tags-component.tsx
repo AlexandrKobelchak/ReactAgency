@@ -1,12 +1,12 @@
 import {Component} from "react";
 import "./client-tags.css"
-import {TagViewModel} from "../../data/TagViewModel";
+import {ClientTagService, TagViewModel} from "../../data/TagViewModel";
 import {Switch} from "../switch/switch";
 
 
 export interface ClientTagsProps {
 
-    clientTags: TagViewModel[];
+    clientTags: ClientTagService;
 }
 
 export interface ClientTagsState{
@@ -18,17 +18,13 @@ export class ClientTagsComponent extends Component<ClientTagsProps, ClientTagsSt
 
     constructor(props:ClientTagsProps) {
         super(props);
-        let tags : TagViewModel[] = [];
-        this.props.clientTags.map((tag)=>{
-            tags.push(tag);
-        });
-        this.state={clientTags: tags};
+        this.state={clientTags: props.clientTags.clientTags};
     }
 
     render() {
         return <div style={{textAlign:"left"}}>
             {this.state.clientTags.map((tag)=>{
-                return <div className="col-md-6 float-left">
+                return <div className="col-md-6 float-left" key={"_"+tag.id}>
                 <Switch isChecked={tag.isChecked} name={tag.id.toString()} label={tag.tagName} id={tag.id.toString()} />
                 </div>
             })}

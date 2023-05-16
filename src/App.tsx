@@ -1,49 +1,45 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Clock} from "./components/clock/clock";
 import {Switch} from "./components/switch/switch";
 import {ClientTagsComponent} from "./components/client-tags/client-tags-component";
-import {TagViewModel} from "./data/TagViewModel";
+import {ClientTagService, TagViewModel} from "./data/TagViewModel";
 import {Guid} from "guid-typescript";
 
+export interface AppState{
 
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Clock locale="en-us"/>
-        <br/>
-        <Switch isChecked={true} id="test" name="test" label="Check me" />
-        <br/>
-
-        <ClientTagsComponent clientTags = {[
-          new TagViewModel( Guid.create(), "VIP", true),
-          new TagViewModel( Guid.create(),"Горнолыжный отдых", false),
-          new TagViewModel( Guid.create(),"Постоянный клиент", true),
-          new TagViewModel( Guid.create(), "Эконом", true),
-          new TagViewModel( Guid.create(),"Активный отдых", false),
-          new TagViewModel( Guid.create(),"Ездит один", false),
-          new TagViewModel( Guid.create(),"Семья", true),
-          new TagViewModel( Guid.create(),"Экскурсионный отдых", false),
-        ]}/>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    clientTagService: ClientTagService;
 }
 
-export default App;
+
+export default class App extends Component<any, any>{
+
+    constructor(props: any) {
+        super(props);
+        this.state={clientTagService : new ClientTagService()}
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <Clock locale="en-us"/>
+                    <br/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            {this.state.clientTagService.clientTags.map((tag:TagViewModel)=>{
+
+                                return <div key={"__"+tag.id}><span style={tag.isChecked ? {color:"red"} : {color: "white"}}>{tag.tagName}</span></div>
+                            })}
+                        </div>
+                        <div className="col-md-6">
+                            <ClientTagsComponent clientTags = {this.state.clientTagService}/>
+                        </div>
+                    </div>
+                    <br/>
+                </header>
+            </div>
+        );
+    }
+}

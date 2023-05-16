@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+      <App><div className="loader"></div></App>
   </React.StrictMode>
 );
 
