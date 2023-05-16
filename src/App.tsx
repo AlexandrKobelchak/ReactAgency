@@ -37,6 +37,11 @@ export default class App extends Component<any, any>{
         this.state.clientTagService.clientTags[0].isChecked=!this.state.clientTagService.clientTags[0].isChecked;
         this.setState(this.state);
     }
+
+    update=()=>{
+        this.setState(this.state);
+    }
+
     render() {
         return (
             <div className="App">
@@ -55,7 +60,7 @@ export default class App extends Component<any, any>{
                             })}
                         </div>
                         <div className="col-md-6">
-                            <ClientTagsComponent clientTags = {this.state.clientTagService}/>
+                            <ClientTagsComponent clientTags = {this.state.clientTagService} parent={this}/>
                         </div>
                     </div>
                 </header>
