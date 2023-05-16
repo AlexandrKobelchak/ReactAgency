@@ -21,14 +21,14 @@ export class TagSwitch extends Component<TagSwitchProps, TagSwitchState> {
 
     handleChange= ()=>{
 
-        debugger;
-        this.props.parent.update(this.state.tag, this.props.index);
+        this.state.tag.isChecked =  !this.state.tag.isChecked;
+        this.props.parent.update();
     }
 
     render() {
         return <span className="Switch">
             <input  type="checkbox" id={this.state.tag.id.toString()} className="checkbox" name={this.state.tag.tagName}
-                    defaultChecked={this.state.tag.isChecked}  onChange={this.handleChange}/>
+                    checked={this.state.tag.isChecked}  onChange={this.handleChange}/>
             <label htmlFor={this.state.tag.id.toString()}>{this.state.tag.tagName}</label>
         </span>
     }

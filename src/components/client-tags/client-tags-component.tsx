@@ -7,6 +7,7 @@ import {TagSwitch} from "../switch-tag/switch-tag";
 
 export interface ClientTagsProps {
 
+    parent?:Component;
     clientTags: ClientTagService;
 }
 
@@ -22,11 +23,15 @@ export class ClientTagsComponent extends Component<ClientTagsProps, ClientTagsSt
         this.state={clientTags: props.clientTags.clientTags};
     }
 
-    public update = (clientTag: TagViewModel, index: number)=> {
+    public update = ()=> {
 
-        this.state.clientTags[index]=clientTag;
-        debugger;
         this.setState(  this.state );
+
+        // @ts-ignore
+        if(this.props.parent && this.props.parent.update) {
+            // @ts-ignore
+            this.props.parent.update();
+        }
     }
 
 
