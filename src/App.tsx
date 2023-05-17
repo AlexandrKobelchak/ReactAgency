@@ -7,7 +7,9 @@ import {ClientTagsComponent} from "./components/client-tags/client-tags-componen
 import {ClientTagService, TagViewModel} from "./data/TagViewModel";
 import {Guid} from "guid-typescript";
 import {Simulate} from "react-dom/test-utils";
-import click = Simulate.click;
+import 'bootstrap/dist/css/bootstrap.css';
+import {ClientNavbar} from "./components/navbar/clientage-navbar-component";
+import {MainNavbar} from "./components/navbar/main-navbar-component";
 
 
 export interface AppProps{
@@ -37,7 +39,7 @@ export default class App extends Component<any, any>{
         this.state.clientTagService.clientTags[0].isChecked=!this.state.clientTagService.clientTags[0].isChecked;
         this.setState(this.state);
     }
-
+    
     update=()=>{
         this.setState(this.state);
     }
@@ -45,22 +47,33 @@ export default class App extends Component<any, any>{
     render() {
         return (
             <div className="App">
+                <MainNavbar />
+                <ClientNavbar/>
                 <header className="App-header">
-                    <Clock locale="en-us"/>
-                    <br/>
-                    <button type="button" onClick={this.clickAdd} >PRESS ME</button>
-                    <br/>
-                    <button type="button" onClick={this.clickTest} >PRESS TEST</button>
-                    <br/>
                     <div className="row">
                         <div className="col-md-6">
-                            {this.state.clientTagService.clientTags.map((tag:TagViewModel)=>{
 
-                                return <div key={"__"+tag.id}><span style={tag.isChecked ? {color:"red"} : {color: "white"}}>{tag.tagName}</span></div>
-                            })}
+
                         </div>
                         <div className="col-md-6">
                             <ClientTagsComponent clientTags = {this.state.clientTagService} parent={this}/>
+                        </div>
+                    </div>
+                    <div className="row" style={{marginTop:"80px"}}>
+                        <div className="col-md-2 offset-md-1">
+
+                            <Clock locale="en-us"/>
+                            <br/>
+                            <button type="button" onClick={this.clickAdd} >PRESS ME</button>
+                            <br/>
+                            <button type="button" onClick={this.clickTest} >PRESS TEST</button>
+                            <br/>
+
+                        </div>
+                        <div className="col-md-3">
+                            {this.state.clientTagService.clientTags.map((tag:TagViewModel)=>{
+                                return <div key={"__"+tag.id}><span style={tag.isChecked ? {color:"red"} : {color: "black"}}>{tag.tagName}</span></div>
+                            })}
                         </div>
                     </div>
                 </header>

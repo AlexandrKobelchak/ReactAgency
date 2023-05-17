@@ -9,29 +9,29 @@ export interface TagSwitchProps{
     parent: ClientTagsComponent;
 }
 export interface TagSwitchState{
-    isChecked: boolean;
+    tag: TagViewModel;
 }
 
 export class TagSwitch extends Component<TagSwitchProps, TagSwitchState> {
 
     constructor(props:TagSwitchProps) {
         super(props);
-        this.state={ isChecked: this.props.tags[this.props.index].isChecked}
+        this.state={ tag: this.props.tags[this.props.index]}
     }
 
     handleChange= ()=>{
 
         this.props.tags[this.props.index].isChecked=!this.props.tags[this.props.index].isChecked;
-        this.setState( {isChecked: !this.state.isChecked});
+        this.setState( {tag: this.props.tags[this.props.index]});
         this.props.parent.update();
     }
 
     render() {
         let tag=this.props.tags[this.props.index];
-        return <span className="Switch">
+        return <div className="Switch">
             <input  type="checkbox" id={tag.id.toString()} className="checkbox" name={tag.tagName}
-                    checked={this.state.isChecked}  onChange={this.handleChange}/>
+                    checked={this.state.tag.isChecked}  onChange={this.handleChange}/>
             <label htmlFor={tag.id.toString()}>{tag.tagName}</label>
-        </span>
+        </div>
     }
 }

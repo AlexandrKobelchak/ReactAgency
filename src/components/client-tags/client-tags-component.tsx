@@ -36,12 +36,15 @@ export class ClientTagsComponent extends Component<ClientTagsProps, ClientTagsSt
 
 
     render() {
-        return <div style={{textAlign:"left"}}>
-            {this.state.clientTags.map((tag, index, array)=>{
+        return(
+        <div className="row" style={{textAlign:"left"}}>
+            {
+                this.state.clientTags.map((tag, index, array)=>{
                 return <div className="col-md-6 float-left" key={"_"+tag.id}>
-                <TagSwitch tags={array} index={index} parent={this}/>
+                    <TagSwitch   tags={array} index={index} parent={this}/>
                 </div>
             })}
-        </div>;
+        </div>
+        );
     }
 }

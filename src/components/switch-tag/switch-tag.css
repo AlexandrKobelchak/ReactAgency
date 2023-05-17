@@ -1,4 +1,8 @@
 /* checkbox */
+.Switch{
+    margin: 10px 0;
+}
+
 .Switch > .checkbox {
     position: absolute;
     z-index: -1;
